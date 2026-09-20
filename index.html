@@ -5,27 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Meet Emmanuel Essel: IT support, university studies, personal interests and the KEN VPN project.">
     <title>Emmanuel Essel | About Me</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 8px;
+        background-color: #f2f2f2;
+        color: #000000;
+        font-family: Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      main {
+        max-width: 796px;
+        margin: 8px auto;
+        padding: 16px;
+        background-color: white;
+        border-top: 6px solid #000000;
+        overflow-wrap: break-word;
+      }
+
+      .page-intro {
+        margin: 0;
+      }
+
+      h1 {
+        margin: 8px 0;
+        font-size: 1.75rem;
+      }
+
+      hr {
+        border: 0;
+        border-top: 1px solid #000000;
+        margin: 24px 0;
+      }
+
+      .work-history {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+      }
+
+      .work-history h3 {
+        margin-top: 0;
+      }
+
+      .work-history p {
+        margin-bottom: 0;
+      }
+
+      ul {
+        padding-inline-start: 24px;
+      }
+
+      a {
+        color: #000000;
+      }
+
+      .project-icon {
+        max-width: 100%;
+        height: auto;
+        border-radius: 20px;
+      }
+
+      .priority-heading {
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+
+      .detail-heading {
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      .detail-copy {
+        margin-top: 4px;
+      }
+
+      pre {
+        padding: 16px;
+        background-color: #f2f2f2;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font-size: 1rem;
+      }
+
+      .page-footer {
+        font-size: 0.9rem;
+      }
+
+      @media (min-width: 48rem) {
+        body {
+          padding: 16px;
+        }
+
+        main {
+          margin: 16px auto;
+          padding: 28px;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        .work-history {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 24px;
+        }
+
+        ul {
+          padding-inline-start: 40px;
+        }
+      }
+    </style>
   </head>
 
-  <body style="margin: 0; padding: 16px; background-color: #f2f2f2; color: #000000; font-family: Arial, sans-serif; font-size: 16px; line-height: 1.6;">
-    <main style="max-width: 740px; margin: 16px auto; padding: 28px; background-color: white; border-top: 6px solid #000000;">
-      <p style="margin: 0; color: #000000;">IT, learning and personal projects</p>
-      <h1 style="margin: 8px 0; color: #000000; font-size: 2.2rem;">Hi, I'm Emmanuel!</h1>
+  <body>
+    <main>
+      <p class="page-intro">IT, learning and personal projects</p>
+      <h1>Hi, I'm Emmanuel!</h1>
 
       
       <p>IT support and infrastructure professional<br>Student at Sheffield Hallam University</p>
       <p>I enjoy understanding how technology works and using it to solve practical problems. Alongside my IT background, I am studying Web Technologies and developing my skills in building and publishing websites.</p>
 
-      <hr style="border: 0; border-top: 1px solid #000000; margin: 24px 0;">
+      <hr>
 
-      <h2 style="color: #000000;">My work background</h2>
-      <h3>Current Workplace</h3>
-      <p>My experience includes IT support, helping users with Windows, Microsoft 365 and business applications. I value clear communication and a structured approach to troubleshooting.</p>
+      <h2>My work background</h2>
+      <div class="work-history">
+        <div>
+          <h3>Current Workplace</h3>
+          <p>My experience includes IT support, helping users with Windows, Microsoft 365 and business applications. I value clear communication and a structured approach to troubleshooting.</p>
+        </div>
+        <div>
+          <h3>Previous Workplace</h3>
+          <p>At my previous workplace, I worked in second-line support and infrastructure, supporting different customer environments. This involved Microsoft technologies, networking and investigating technical problems.</p>
+        </div>
+      </div>
 
-      <h3>Previous Workplace</h3>
-      <p>At my previous workplace, I worked in second-line support and infrastructure, supporting different customer environments. This involved Microsoft technologies, networking and investigating technical problems.</p>
-
-      <h2 style="color: #000000;">My interests</h2>
+      <h2>My interests</h2>
       <ul>
         <li>Cybersecurity, networking and online privacy.</li>
         <li>Building apps and exploring ways to automate everyday tasks.</li>
@@ -33,30 +155,30 @@
       </ul>
       <p>I like projects that let me connect theory with practice, try an idea and learn from the result.</p>
 
-      <hr style="border: 0; border-top: 1px solid #000000; margin: 24px 0;">
+      <hr>
 
-      <h2 style="color: #000000;">My personal project</h2>
+      <h2>My personal project</h2>
 
-      <img src="ken-vpn.png" alt="KEN VPN app icon: a white swirl around a cyan centre on a dark blue background" width="96" height="96" style="border-radius: 20px;">
+      <img src="ken-vpn.png" alt="KEN VPN app icon: a white swirl around a cyan centre on a dark blue background" width="96" height="96" class="project-icon">
       <h3>KEN VPN</h3>
       <p>KEN VPN is a personal app project I am developing with Flutter. It brings together my interests in networking, privacy and app design, and gives me opportunities to practise development, testing and troubleshooting.</p>
-      <p><a href="https://kensecure.com/" title="Visit the KEN VPN website" style="color: #000000;">Explore KEN VPN</a></p>
+      <p><a href="https://kensecure.com/" title="Visit the KEN VPN website">Explore KEN VPN</a></p>
 
-      <h4 style="font-size: 1.1rem; margin-bottom: 4px;">Development priorities</h4>
-      <p style="margin-top: 4px;">Reliable connections and an interface that is easy to understand.</p>
-      <h5 style="font-size: 1rem; margin-bottom: 4px;">User experience</h5>
-      <p style="margin-top: 4px;">Clear information helps people understand what the app is doing.</p>
-      <h6 style="font-size: 1rem; margin-bottom: 4px;">Connection status</h6>
-      <p style="margin-top: 4px;">One example is making the difference between connecting and connected easy to recognise.</p>
+      <h4 class="priority-heading">Development priorities</h4>
+      <p class="detail-copy">Reliable connections and an interface that is easy to understand.</p>
+      <h5 class="detail-heading">User experience</h5>
+      <p class="detail-copy">Clear information helps people understand what the app is doing.</p>
+      <h6 class="detail-heading">Connection status</h6>
+      <p class="detail-copy">One example is making the difference between connecting and connected easy to recognise.</p>
 
-      <h2 style="color: #000000;">My approach to learning</h2>
+      <h2>My approach to learning</h2>
 
-      <pre style="padding: 16px; background-color: #f2f2f2; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 1rem;">Learn the idea
+      <pre>Learn the idea
   Build something small
   Test the result
 Keep improving</pre>
 
-      <p style="font-size: 0.9rem; color: #000000;">Emmanuel Essel &middot; Web Technologies<br><a href="https://github.com/EmmanuelEsselSHU/my-first-web-app" title="View the HTML source on GitHub" style="color: #000000;">View this website's code</a></p>
+      <p class="page-footer">Emmanuel Essel &middot; Web Technologies<br><a href="https://github.com/EmmanuelEsselSHU/my-first-web-app" title="View the HTML source on GitHub">View this website's code</a></p>
     </main>
   </body>
 </html>
