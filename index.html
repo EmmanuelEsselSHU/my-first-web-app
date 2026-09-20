@@ -98,6 +98,84 @@
         font-size: 0.9rem;
       }
 
+      .planner-fields {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .form-field label {
+        display: block;
+        margin-bottom: 4px;
+        font-weight: bold;
+      }
+
+      .form-field select,
+      .form-field input {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        min-height: 44px;
+        padding: 8px;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        background-color: white;
+        color: #000000;
+        font: inherit;
+      }
+
+      .field-help {
+        margin: 4px 0 0;
+        font-size: 0.9rem;
+      }
+
+      .checkbox-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin: 16px 0;
+      }
+
+      .checkbox-label input {
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        margin: 4px 0 0;
+        accent-color: #000000;
+      }
+
+      .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .form-actions button {
+        min-height: 44px;
+        padding: 8px 16px;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        background-color: white;
+        color: #000000;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .form-actions button[type="submit"] {
+        font-weight: bold;
+      }
+
+      #learning-planner :focus-visible {
+        outline: 2px solid #000000;
+        outline-offset: 3px;
+      }
+
+      .planner-result {
+        padding: 16px;
+        border-left: 3px solid #000000;
+        background-color: #f2f2f2;
+      }
+
       @media (min-width: 48rem) {
         body {
           padding: 16px;
@@ -115,6 +193,10 @@
         .work-history {
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 24px;
+        }
+
+        .planner-fields {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         ul {
@@ -178,7 +260,103 @@
   Test the result
 Keep improving</pre>
 
+      <section id="learning-session" aria-labelledby="planner-heading">
+        <h2 id="planner-heading">Plan a learning session</h2>
+        <p>Choose a topic and the time you have available to get a simple study plan.</p>
+
+        <form id="learning-planner" hidden>
+          <div class="planner-fields">
+            <div class="form-field">
+              <label for="learning-topic">Topic</label>
+              <select id="learning-topic" name="topic" required>
+                <option value="">Choose a topic</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="javascript">JavaScript</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="learning-minutes">Time available (minutes)</label>
+              <input id="learning-minutes" name="minutes" type="number" min="15" max="120" step="5" value="30" required aria-describedby="minutes-help">
+              <p id="minutes-help" class="field-help">15 to 120 minutes, in steps of 5.</p>
+            </div>
+          </div>
+
+          <label class="checkbox-label" for="include-practice">
+            <input id="include-practice" name="practice" type="checkbox" checked>
+            Include a practical exercise
+          </label>
+
+          <div class="form-actions">
+            <button type="submit">Plan my session</button>
+            <button type="reset">Reset</button>
+          </div>
+          <p id="planner-result" class="planner-result" role="status" aria-atomic="true">Choose your options, then select Plan my session.</p>
+        </form>
+        <noscript><p>Enable JavaScript in your browser to use the learning-session planner.</p></noscript>
+      </section>
+
       <p class="page-footer">Emmanuel Essel &middot; Web Technologies<br><a href="https://github.com/EmmanuelEsselSHU/my-first-web-app" title="View the HTML source on GitHub">View this website's code</a></p>
     </main>
+    <script>
+      const planner = document.getElementById('learning-planner');
+      const topicInput = document.getElementById('learning-topic');
+      const minutesInput = document.getElementById('learning-minutes');
+      const practiceInput = document.getElementById('include-practice');
+      const result = document.getElementById('planner-result');
+      const startingMessage = result.textContent;
+
+      const topics = {
+        html: {
+          name: 'HTML',
+          reading: 'review headings, paragraphs and meaningful links',
+          exercise: 'build a section with a heading, a paragraph and a link'
+        },
+        css: {
+          name: 'CSS',
+          reading: 'review selectors, spacing and media queries',
+          exercise: 'adjust a layout and check it at phone and desktop widths'
+        },
+        javascript: {
+          name: 'JavaScript',
+          reading: 'review variables, events and updating page text',
+          exercise: 'make a button update a message when clicked'
+        }
+      };
+
+      planner.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const topic = topics[topicInput.value];
+        const minutes = minutesInput.valueAsNumber;
+
+        if (!topic || !Number.isInteger(minutes) || minutes < 15 || minutes > 120 || minutes % 5 !== 0) {
+          result.textContent = 'Choose a topic and enter 15 to 120 minutes in steps of 5.';
+          return;
+        }
+
+        let readingMinutes = minutes - 5;
+        let exerciseStep = '';
+
+        if (practiceInput.checked) {
+          readingMinutes = Math.max(5, Math.round(minutes * 0.3 / 5) * 5);
+          const practiceMinutes = minutes - readingMinutes - 5;
+          exerciseStep = `${practiceMinutes} minutes to ${topic.exercise}. `;
+        }
+
+        result.textContent = `Your ${minutes}-minute ${topic.name} plan: ` +
+          `${readingMinutes} minutes to ${topic.reading}. ` + exerciseStep +
+          'Finish with 5 minutes to note what you learnt and one thing to try next.';
+      });
+
+      function clearPlan() {
+        if (result.textContent !== startingMessage) {
+          result.textContent = startingMessage;
+        }
+      }
+
+      planner.addEventListener('input', clearPlan);
+      planner.addEventListener('reset', clearPlan);
+      planner.hidden = false;
+    </script>
   </body>
 </html>
