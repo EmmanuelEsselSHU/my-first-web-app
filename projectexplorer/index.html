@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Find public GitHub projects, explore their languages and activity, and check related npm packages.">
+    <meta name="color-scheme" content="light">
+    <title>Project Explorer | Discover public GitHub projects</title>
+    <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header shell">
+      <a class="brand" href="./" aria-label="Project Explorer home">
+        <img src="assets/mark.svg" width="38" height="38" alt="">
+        <span>PROJECT<br>EXPLORER<span class="brand-dot" aria-hidden="true">.</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#search-panel">Explore</a>
+        <a href="#about">How it works</a>
+      </nav>
+    </header>
+
+    <main id="main" class="shell" tabindex="-1">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Discover · Inspect · Learn</p>
+          <h1 id="page-title">Find your next<br>project to explore.</h1>
+          <p class="hero-copy">Search public GitHub repositories, explore their languages and activity, and check related npm packages.</p>
+        </div>
+        <div class="source-note">
+          <span class="source-symbol" aria-hidden="true">{ }</span>
+          <p>Public data from<br><strong>GitHub + npm</strong></p>
+          <span class="small-text">No account needed</span>
+        </div>
+      </section>
+
+      <section id="search-panel" class="search-panel" aria-labelledby="search-title">
+        <div class="section-top">
+          <h2 id="search-title">Search repositories</h2>
+          <button class="text-button" id="reset-search" type="reset" form="search-form">Reset search</button>
+        </div>
+        <!-- Native labels and constraints follow W3C guidance:
+             https://www.w3.org/WAI/tutorials/forms/labels/ -->
+        <form id="search-form" role="search">
+          <fieldset id="search-controls" disabled>
+            <legend class="sr-only">Repository search options</legend>
+            <div class="search-row">
+              <div class="field">
+                <label for="keywords">Project keywords <span class="required-note">(required)</span></label>
+                <input id="keywords" name="keywords" type="search" required minlength="2" maxlength="80" placeholder="e.g. axios, accessibility, weather" aria-describedby="keywords-help" autocomplete="off">
+              </div>
+              <button id="search-button" class="button button-dark" type="submit"><span>Search projects</span><span aria-hidden="true">↗</span></button>
+            </div>
+            <p id="keywords-help" class="field-help">Search names and descriptions. Use 2–80 characters: letters, numbers, spaces or . _ + # -</p>
+            <div class="filter-grid">
+              <div class="field">
+                <label for="language">Programming language</label>
+                <select id="language" name="language">
+                  <option value="">Any language</option>
+                  <option>JavaScript</option><option>TypeScript</option><option>Python</option>
+                  <option>HTML</option><option>CSS</option><option>Java</option><option>C#</option>
+                  <option>C++</option><option>Go</option><option>Rust</option><option>Dart</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="min-stars">Minimum stars</label>
+                <input id="min-stars" name="minStars" type="number" min="0" max="1000000" step="1" value="0" required aria-describedby="stars-help">
+              </div>
+              <div class="field">
+                <label for="sort">Sort results</label>
+                <select id="sort" name="sort">
+                  <option value="">Best match</option>
+                  <option value="stars">Most stars</option>
+                  <option value="updated">Recently updated</option>
+                </select>
+              </div>
+            </div>
+            <div class="filter-bottom">
+              <label class="check-label" for="include-archived"><input id="include-archived" name="includeArchived" type="checkbox"> Include archived projects</label>
+              <p id="stars-help" class="field-help">Stars reflect interest, not a project's quality.</p>
+            </div>
+          </fieldset>
+        </form>
+        <p id="setup-message" class="field-help">Getting search ready. Refresh the page if the controls remain unavailable.</p>
+        <noscript><p>JavaScript is needed to search here. You can <a href="https://github.com/search?type=repositories">search repositories on GitHub</a> instead.</p></noscript>
+      </section>
+
+      <div class="workspace">
+        <section class="results-panel" aria-labelledby="results-title">
+          <div class="section-top results-top">
+            <h2 id="results-title" tabindex="-1">Your discoveries</h2>
+            <span id="results-count" class="small-text">Ready when you are</span>
+          </div>
+          <!-- Announce concise updates instead of making every result a live
+               announcement. W3C, Understanding Status Messages (SC 4.1.3):
+               https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html -->
+          <p id="search-status" class="status" role="status" aria-atomic="true">Enter a keyword above, or try one of these starting points.</p>
+          <div id="results-body" aria-busy="false">
+            <div id="results-placeholder" class="empty-state">
+              <span class="empty-mark" aria-hidden="true">⌘</span>
+              <h3 id="placeholder-title">A good project starts with curiosity.</h3>
+              <p id="placeholder-copy">Find something to learn from, build with or contribute to.</p>
+              <div id="examples" class="example-list" aria-label="Example searches">
+                <button type="button" class="chip-button" data-example="axios" disabled>axios <span aria-hidden="true">↗</span></button>
+                <button type="button" class="chip-button" data-example="accessibility" disabled>accessibility <span aria-hidden="true">↗</span></button>
+                <button type="button" class="chip-button" data-example="weather" disabled>weather <span aria-hidden="true">↗</span></button>
+              </div>
+              <button id="search-retry" class="button" type="button" hidden>Search again</button>
+            </div>
+            <ul id="results-list" class="repo-grid" aria-label="Repository results" hidden></ul>
+            <nav id="pagination" class="pagination" aria-label="Search result pages" hidden>
+              <button id="previous-page" type="button" class="button">← Previous</button>
+              <p id="page-label" class="small-text"></p>
+              <button id="next-page" type="button" class="button">Next →</button>
+            </nav>
+          </div>
+        </section>
+
+        <aside id="inspector" class="inspector" aria-labelledby="inspector-title">
+          <p class="eyebrow">A closer look</p>
+          <h2 id="inspector-title" tabindex="-1">Project details</h2>
+          <p id="details-status" class="status" role="status" aria-atomic="true">Select a result to explore the project.</p>
+          <div id="inspector-empty" class="inspector-empty">
+            <span class="detail-symbol" aria-hidden="true">↗</span>
+            <p>See the story behind<br>the repository.</p>
+            <ul><li>Project activity and context</li><li>Language breakdown</li><li>Related npm package details</li></ul>
+          </div>
+          <button id="details-retry" class="button" type="button" hidden>Retry project details</button>
+          <div id="inspector-content" hidden>
+            <p id="detail-description"></p>
+            <a id="github-link" class="inline-link" href="https://github.com/">View on GitHub <span aria-hidden="true">↗</span></a>
+            <dl id="detail-facts" class="detail-facts"></dl>
+            <section class="language-section" aria-labelledby="languages-title">
+              <div class="section-top"><h3 id="languages-title">Languages</h3><span class="small-text">Share of code bytes</span></div>
+              <p id="languages-status" class="field-help"></p>
+              <ul id="language-list" class="language-list"></ul>
+            </section>
+            <section class="package-section" aria-labelledby="package-title">
+              <p class="eyebrow">Connect the dots</p>
+              <h3 id="package-title">Does it have an npm package?</h3>
+              <p class="field-help">npm is a registry for JavaScript packages. Enter a published package name to check whether its repository matches this project.</p>
+              <form id="package-form">
+                <fieldset id="package-controls">
+                  <legend class="sr-only">Look up a related npm package</legend>
+                  <div class="field">
+                    <label for="package-name">npm package name <span class="required-note">(required)</span></label>
+                    <input id="package-name" name="packageName" type="text" required maxlength="214" placeholder="e.g. axios or @scope/package" aria-describedby="package-help" spellcheck="false" autocapitalize="none" autocomplete="off">
+                  </div>
+                  <p id="package-help" class="field-help">Use the published name; it can differ from the repository name.</p>
+                  <button id="package-button" class="button" type="submit">Check package <span aria-hidden="true">↗</span></button>
+                </fieldset>
+              </form>
+              <p id="package-status" class="status" role="status" aria-atomic="true"></p>
+              <div id="package-result" class="package-result" hidden></div>
+            </section>
+          </div>
+          <div id="inspector-actions" class="inspector-actions" hidden>
+            <button id="back-results" class="text-button" type="button">← Back to selected result</button>
+            <button id="refresh-details" class="text-button" type="button" hidden>Refresh details</button>
+          </div>
+        </aside>
+      </div>
+
+      <section id="about" class="about" aria-labelledby="about-title">
+        <div><p class="eyebrow">How it works</p><h2 id="about-title">From a keyword<br>to a closer look.</h2></div>
+        <ol class="steps">
+          <li><h3>Find a project</h3><p>Your keywords and filters search public GitHub repositories. Archived projects are excluded unless you include them.</p></li>
+          <li><h3>Explore its context</h3><p>Inspect the description, recent code activity and languages. Stars are a popularity signal, not a quality score.</p></li>
+          <li><h3>Check a package</h3><p>For projects published on npm, look up the package and compare its declared repository with the project you selected.</p></li>
+        </ol>
+        <p class="data-note">Results are cached for five minutes during this visit to reduce repeated requests. Public APIs can limit requests or be temporarily unavailable. Search terms go to GitHub; package names go to npm. No account or private repository access is used.</p>
+      </section>
+    </main>
+    <footer class="site-footer shell"><p>Project Explorer <span aria-hidden="true">/</span> Emmanuel Essel</p><p><a href="https://docs.github.com/en/rest/search/search#search-repositories">GitHub data</a><span aria-hidden="true"> · </span><a href="https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md">npm data</a></p></footer>
+  </body>
+</html>
