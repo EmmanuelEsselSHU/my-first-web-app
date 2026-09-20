@@ -165,7 +165,8 @@
         font-weight: bold;
       }
 
-      #learning-planner :focus-visible {
+      #learning-planner :focus-visible,
+      #github-project :focus-visible {
         outline: 2px solid #000000;
         outline-offset: 3px;
       }
@@ -174,6 +175,31 @@
         padding: 16px;
         border-left: 3px solid #000000;
         background-color: #f2f2f2;
+      }
+
+      .form-actions button:disabled {
+        cursor: wait;
+        border-style: dashed;
+      }
+
+      .project-details {
+        padding: 16px;
+        border-left: 3px solid #000000;
+        background-color: #f2f2f2;
+      }
+
+      .project-details dt {
+        margin-top: 12px;
+        font-weight: bold;
+      }
+
+      .project-details dt:first-child {
+        margin-top: 0;
+      }
+
+      .project-details dd {
+        margin: 0;
+        overflow-wrap: anywhere;
       }
 
       @media (min-width: 48rem) {
@@ -296,6 +322,29 @@ Keep improving</pre>
         <noscript><p>Enable JavaScript in your browser to use the learning-session planner.</p></noscript>
       </section>
 
+      <section id="github-project" aria-labelledby="github-heading">
+        <h2 id="github-heading">This website on GitHub</h2>
+        <p>See the latest public details about the code behind this page.</p>
+
+        <div id="github-controls" hidden>
+          <div class="form-actions">
+            <button id="load-project" type="button">Load project details</button>
+          </div>
+          <p id="github-status" role="status" aria-atomic="true">Select the button to load the details from GitHub.</p>
+          <dl id="github-details" class="project-details" hidden>
+            <dt>Project name</dt>
+            <dd id="project-name"></dd>
+            <dt>Description</dt>
+            <dd id="project-description"></dd>
+            <dt>Main language</dt>
+            <dd id="project-language"></dd>
+            <dt>Code last pushed</dt>
+            <dd id="project-pushed"></dd>
+          </dl>
+        </div>
+        <noscript><p>Enable JavaScript to load the project details, or use the code link below.</p></noscript>
+      </section>
+
       <p class="page-footer">Emmanuel Essel &middot; Web Technologies<br><a href="https://github.com/EmmanuelEsselSHU/my-first-web-app" title="View the HTML source on GitHub">View this website's code</a></p>
     </main>
     <script>
@@ -357,6 +406,82 @@ Keep improving</pre>
       planner.addEventListener('input', clearPlan);
       planner.addEventListener('reset', clearPlan);
       planner.hidden = false;
+
+      const loadProjectButton = document.getElementById('load-project');
+      const githubStatus = document.getElementById('github-status');
+      const githubDetails = document.getElementById('github-details');
+      const repositoryUrl = 'https://api.github.com/repos/EmmanuelEsselSHU/my-first-web-app';
+
+      loadProjectButton.addEventListener('click', async function () {
+        if (loadProjectButton.disabled) return;
+        loadProjectButton.disabled = true;
+        loadProjectButton.textContent = 'Loading...';
+        githubDetails.hidden = true;
+        githubStatus.textContent = 'Loading project details from GitHub...';
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(function () { controller.abort(); }, 10000);
+        let failureMessage = 'Could not load the project details. Check your connection and try again.';
+
+        try {
+          const response = await fetch(repositoryUrl, {
+            headers: {
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2026-03-10'
+            },
+            signal: controller.signal
+          });
+
+          if (!response.ok) {
+            if (response.status === 403 || response.status === 429) {
+              failureMessage = 'GitHub is temporarily refusing requests. Please try again later.';
+            } else if (response.status === 404) {
+              failureMessage = 'This project could not be found on GitHub. Please try again later.';
+            }
+            throw new Error('The API request was unsuccessful.');
+          }
+
+          failureMessage = 'GitHub returned unexpected data. Please try again later.';
+          const repository = await response.json();
+          if (!repository || Array.isArray(repository) || typeof repository.name !== 'string' || !repository.name.trim()) {
+            throw new Error('A project name was missing from the response.');
+          }
+
+          if (repository.pushed_at != null && typeof repository.pushed_at !== 'string') {
+            throw new Error('The response contained an invalid date.');
+          }
+          const pushedAt = repository.pushed_at ? new Date(repository.pushed_at) : null;
+          if (pushedAt && Number.isNaN(pushedAt.getTime())) {
+            throw new Error('The response contained an invalid date.');
+          }
+
+          document.getElementById('project-name').textContent = repository.name;
+          document.getElementById('project-description').textContent =
+            typeof repository.description === 'string' && repository.description.trim()
+              ? repository.description : 'No description provided.';
+          document.getElementById('project-language').textContent =
+            typeof repository.language === 'string' && repository.language.trim()
+              ? repository.language : 'Not yet identified.';
+          document.getElementById('project-pushed').textContent = pushedAt
+            ? pushedAt.toLocaleString('en-GB', {
+                dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/London'
+              }) + ' (UK time)'
+            : 'Not available.';
+
+          githubDetails.hidden = false;
+          githubStatus.textContent = 'Project details loaded from GitHub.';
+        } catch (error) {
+          githubStatus.textContent = error.name === 'AbortError'
+            ? 'GitHub took too long to respond. Please try again.'
+            : failureMessage;
+        } finally {
+          clearTimeout(timeoutId);
+          loadProjectButton.disabled = false;
+          loadProjectButton.textContent = githubDetails.hidden ? 'Try again' : 'Refresh project details';
+        }
+      });
+
+      document.getElementById('github-controls').hidden = false;
     </script>
   </body>
 </html>
