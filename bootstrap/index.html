@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet Emmanuel Essel: IT support, university studies, personal interests and the KEN VPN project.">
+    <title>Emmanuel Essel | About Me — Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet">
+    <script src="app.js" defer></script>
+  </head>
+
+  <body class="px-2">
+    <a href="#main-content" class="visually-hidden-focusable d-inline-block p-2">Skip to main content</a>
+
+    <main id="main-content" class="container page-shell bg-white border-top border-5 border-black p-3 p-md-4 my-3" tabindex="-1">
+      <header>
+        <p class="mb-0">IT, learning and personal projects</p>
+        <h1 class="h2 fw-bold my-2">Hi, I'm Emmanuel!</h1>
+        <p>IT support and infrastructure professional<br>Student at Sheffield Hallam University</p>
+        <p>I enjoy understanding how technology works and using it to solve practical problems. Alongside my IT background, I am studying Web Technologies and developing my skills in building and publishing websites.</p>
+      </header>
+
+      <hr class="my-4 opacity-100">
+
+      <section class="mb-4" aria-labelledby="work-heading">
+        <h2 id="work-heading" class="h4 fw-bold mb-3">My work background</h2>
+        <div class="row g-3 work-history">
+          <div class="col-12 col-md-6">
+            <div class="card h-100 border-black">
+              <div class="card-body">
+                <h3 class="h5 fw-bold">Current Workplace</h3>
+                <p class="mb-0">My experience includes IT support, helping users with Windows, Microsoft 365 and business applications. I value clear communication and a structured approach to troubleshooting.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="card h-100 border-black">
+              <div class="card-body">
+                <h3 class="h5 fw-bold">Previous Workplace</h3>
+                <p class="mb-0">At my previous workplace, I worked in second-line support and infrastructure, supporting different customer environments. This involved Microsoft technologies, networking and investigating technical problems.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="interests-heading">
+        <h2 id="interests-heading" class="h4 fw-bold">My interests</h2>
+        <ul class="ps-4">
+          <li>Cybersecurity, networking and online privacy.</li>
+          <li>Building apps and exploring ways to automate everyday tasks.</li>
+          <li>Gaming, particularly football and basketball games.</li>
+        </ul>
+        <p>I like projects that let me connect theory with practice, try an idea and learn from the result.</p>
+      </section>
+
+      <hr class="my-4 opacity-100">
+
+      <section class="mb-4" aria-labelledby="project-heading">
+        <h2 id="project-heading" class="h4 fw-bold mb-3">My personal project</h2>
+        <img src="ken-vpn.png" alt="KEN VPN app icon: a white swirl around a cyan centre on a dark blue background" width="96" height="96" class="img-fluid rounded-4 mb-3 project-icon">
+        <h3 class="h5 fw-bold">KEN VPN</h3>
+        <p>KEN VPN is a personal app project I am developing with Flutter. It brings together my interests in networking, privacy and app design, and gives me opportunities to practise development, testing and troubleshooting.</p>
+        <p><a href="https://kensecure.com/" title="Visit the KEN VPN website">Explore KEN VPN</a></p>
+
+        <h4 class="fs-6 fw-bold mb-1">Development priorities</h4>
+        <p>Reliable connections and an interface that is easy to understand.</p>
+        <h5 class="fs-6 fw-bold mb-1">User experience</h5>
+        <p>Clear information helps people understand what the app is doing.</p>
+        <h6 class="fs-6 fw-bold mb-1">Connection status</h6>
+        <p>One example is making the difference between connecting and connected easy to recognise.</p>
+      </section>
+
+      <section class="mb-4" aria-labelledby="learning-heading">
+        <h2 id="learning-heading" class="h4 fw-bold">My approach to learning</h2>
+        <pre class="bg-body-tertiary p-3 mb-0">Learn the idea
+  Build something small
+  Test the result
+Keep improving</pre>
+      </section>
+
+      <section id="learning-session" class="card border-black mb-4" aria-labelledby="planner-heading">
+        <div class="card-body">
+          <h2 id="planner-heading" class="h4 fw-bold">Plan a learning session</h2>
+          <p>Choose a topic and the time you have available to get a simple study plan.</p>
+
+          <form id="learning-planner" hidden>
+            <div class="row g-3 planner-fields">
+              <div class="col-12 col-md-6">
+                <label for="learning-topic" class="form-label fw-bold">Topic</label>
+                <select id="learning-topic" name="topic" class="form-select" required>
+                  <option value="">Choose a topic</option>
+                  <option value="html">HTML</option>
+                  <option value="css">CSS</option>
+                  <option value="javascript">JavaScript</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label for="learning-minutes" class="form-label fw-bold">Time available (minutes)</label>
+                <input id="learning-minutes" name="minutes" class="form-control" type="number" min="15" max="120" step="5" value="30" required aria-describedby="minutes-help">
+                <p id="minutes-help" class="form-text text-black mb-0">15 to 120 minutes, in steps of 5.</p>
+              </div>
+            </div>
+
+            <div class="form-check my-3">
+              <input id="include-practice" name="practice" class="form-check-input" type="checkbox" checked>
+              <label class="form-check-label" for="include-practice">Include a practical exercise</label>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <button type="submit" class="btn btn-light border-black text-black fw-bold">Plan my session</button>
+              <button type="reset" class="btn btn-light border-black text-black">Reset</button>
+            </div>
+            <p id="planner-result" class="bg-body-tertiary border-start border-3 border-black p-3 mt-3 mb-0" role="status" aria-atomic="true">Choose your options, then select Plan my session.</p>
+          </form>
+          <noscript><p>Enable JavaScript in your browser to use the learning-session planner.</p></noscript>
+        </div>
+      </section>
+
+      <section id="github-project" class="card border-black mb-4" aria-labelledby="github-heading">
+        <div class="card-body">
+          <h2 id="github-heading" class="h4 fw-bold">This website on GitHub</h2>
+          <p>See the latest public details about the code behind this page.</p>
+
+          <div id="github-controls" hidden>
+            <button id="load-project" class="btn btn-light border-black text-black" type="button">Load project details</button>
+            <p id="github-status" class="mt-3 mb-0" role="status" aria-atomic="true">Select the button to load the details from GitHub.</p>
+            <dl id="github-details" class="bg-body-tertiary border-start border-3 border-black p-3 mt-3 mb-0" hidden>
+              <dt>Project name</dt>
+              <dd id="project-name"></dd>
+              <dt>Description</dt>
+              <dd id="project-description"></dd>
+              <dt>Main language</dt>
+              <dd id="project-language"></dd>
+              <dt>Code last pushed</dt>
+              <dd id="project-pushed" class="mb-0"></dd>
+            </dl>
+          </div>
+          <noscript><p>Enable JavaScript to load the project details, or use the code link below.</p></noscript>
+        </div>
+      </section>
+
+      <footer class="small">
+        <p class="mb-0">Emmanuel Essel &middot; Web Technologies<br><a href="https://github.com/EmmanuelEsselSHU/my-first-web-app" title="View the HTML source on GitHub">View this website's code</a></p>
+      </footer>
+    </main>
+  </body>
+</html>

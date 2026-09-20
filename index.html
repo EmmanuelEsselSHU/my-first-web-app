@@ -4,148 +4,484 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Meet Emmanuel Essel: IT support, university studies, personal interests and the KEN VPN project.">
-    <title>Emmanuel Essel | About Me — Bootstrap</title>
-    <!-- Bootstrap supplies the grid, forms, cards, buttons and spacing utilities. -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link href="styles.css" rel="stylesheet">
-    <script src="app.js" defer></script>
+    <title>Emmanuel Essel | About Me</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 8px;
+        background-color: #f2f2f2;
+        color: #000000;
+        font-family: Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      main {
+        max-width: 796px;
+        margin: 8px auto;
+        padding: 16px;
+        background-color: white;
+        border-top: 6px solid #000000;
+        overflow-wrap: break-word;
+      }
+
+      .page-intro {
+        margin: 0;
+      }
+
+      h1 {
+        margin: 8px 0;
+        font-size: 1.75rem;
+      }
+
+      hr {
+        border: 0;
+        border-top: 1px solid #000000;
+        margin: 24px 0;
+      }
+
+      .work-history {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+      }
+
+      .work-history h3 {
+        margin-top: 0;
+      }
+
+      .work-history p {
+        margin-bottom: 0;
+      }
+
+      ul {
+        padding-inline-start: 24px;
+      }
+
+      a {
+        color: #000000;
+      }
+
+      .project-icon {
+        max-width: 100%;
+        height: auto;
+        border-radius: 20px;
+      }
+
+      .priority-heading {
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+
+      .detail-heading {
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      .detail-copy {
+        margin-top: 4px;
+      }
+
+      pre {
+        padding: 16px;
+        background-color: #f2f2f2;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font-size: 1rem;
+      }
+
+      .page-footer {
+        font-size: 0.9rem;
+      }
+
+      .planner-fields {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .form-field label {
+        display: block;
+        margin-bottom: 4px;
+        font-weight: bold;
+      }
+
+      .form-field select,
+      .form-field input {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        min-height: 44px;
+        padding: 8px;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        background-color: white;
+        color: #000000;
+        font: inherit;
+      }
+
+      .field-help {
+        margin: 4px 0 0;
+        font-size: 0.9rem;
+      }
+
+      .checkbox-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin: 16px 0;
+      }
+
+      .checkbox-label input {
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        margin: 4px 0 0;
+        accent-color: #000000;
+      }
+
+      .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .form-actions button {
+        min-height: 44px;
+        padding: 8px 16px;
+        border: 1px solid #000000;
+        border-radius: 4px;
+        background-color: white;
+        color: #000000;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .form-actions button[type="submit"] {
+        font-weight: bold;
+      }
+
+      #learning-planner :focus-visible,
+      #github-project :focus-visible {
+        outline: 2px solid #000000;
+        outline-offset: 3px;
+      }
+
+      .planner-result {
+        padding: 16px;
+        border-left: 3px solid #000000;
+        background-color: #f2f2f2;
+      }
+
+      .form-actions button:disabled {
+        cursor: wait;
+        border-style: dashed;
+      }
+
+      .project-details {
+        padding: 16px;
+        border-left: 3px solid #000000;
+        background-color: #f2f2f2;
+      }
+
+      .project-details dt {
+        margin-top: 12px;
+        font-weight: bold;
+      }
+
+      .project-details dt:first-child {
+        margin-top: 0;
+      }
+
+      .project-details dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+
+      @media (min-width: 48rem) {
+        body {
+          padding: 16px;
+        }
+
+        main {
+          margin: 16px auto;
+          padding: 28px;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        .work-history {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 24px;
+        }
+
+        .planner-fields {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        ul {
+          padding-inline-start: 40px;
+        }
+      }
+    </style>
   </head>
 
-  <body class="px-2">
-    <a href="#main-content" class="visually-hidden-focusable d-inline-block p-2">Skip to main content</a>
+  <body>
+    <main>
+      <p class="page-intro">IT, learning and personal projects</p>
+      <h1>Hi, I'm Emmanuel!</h1>
 
-    <main id="main-content" class="container page-shell bg-white border-top border-5 border-black p-3 p-md-4 my-3" tabindex="-1">
-      <header>
-        <p class="mb-0">IT, learning and personal projects</p>
-        <h1 class="h2 fw-bold my-2">Hi, I'm Emmanuel!</h1>
-        <p>IT support and infrastructure professional<br>Student at Sheffield Hallam University</p>
-        <p>I enjoy understanding how technology works and using it to solve practical problems. Alongside my IT background, I am studying Web Technologies and developing my skills in building and publishing websites.</p>
-      </header>
+      
+      <p>IT support and infrastructure professional<br>Student at Sheffield Hallam University</p>
+      <p>I enjoy understanding how technology works and using it to solve practical problems. Alongside my IT background, I am studying Web Technologies and developing my skills in building and publishing websites.</p>
 
-      <hr class="my-4 opacity-100">
+      <hr>
 
-      <section class="mb-4" aria-labelledby="work-heading">
-        <h2 id="work-heading" class="h4 fw-bold mb-3">My work background</h2>
-        <!-- Each entry fills the row on phones and half the row from 768px. -->
-        <div class="row g-3 work-history">
-          <div class="col-12 col-md-6">
-            <div class="card h-100 border-black">
-              <div class="card-body">
-                <h3 class="h5 fw-bold">Current Workplace</h3>
-                <p class="mb-0">My experience includes IT support, helping users with Windows, Microsoft 365 and business applications. I value clear communication and a structured approach to troubleshooting.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="card h-100 border-black">
-              <div class="card-body">
-                <h3 class="h5 fw-bold">Previous Workplace</h3>
-                <p class="mb-0">At my previous workplace, I worked in second-line support and infrastructure, supporting different customer environments. This involved Microsoft technologies, networking and investigating technical problems.</p>
-              </div>
-            </div>
-          </div>
+      <h2>My work background</h2>
+      <div class="work-history">
+        <div>
+          <h3>Current Workplace</h3>
+          <p>My experience includes IT support, helping users with Windows, Microsoft 365 and business applications. I value clear communication and a structured approach to troubleshooting.</p>
         </div>
-      </section>
+        <div>
+          <h3>Previous Workplace</h3>
+          <p>At my previous workplace, I worked in second-line support and infrastructure, supporting different customer environments. This involved Microsoft technologies, networking and investigating technical problems.</p>
+        </div>
+      </div>
 
-      <section aria-labelledby="interests-heading">
-        <h2 id="interests-heading" class="h4 fw-bold">My interests</h2>
-        <ul class="ps-4">
-          <li>Cybersecurity, networking and online privacy.</li>
-          <li>Building apps and exploring ways to automate everyday tasks.</li>
-          <li>Gaming, particularly football and basketball games.</li>
-        </ul>
-        <p>I like projects that let me connect theory with practice, try an idea and learn from the result.</p>
-      </section>
+      <h2>My interests</h2>
+      <ul>
+        <li>Cybersecurity, networking and online privacy.</li>
+        <li>Building apps and exploring ways to automate everyday tasks.</li>
+        <li>Gaming, particularly football and basketball games.</li>
+      </ul>
+      <p>I like projects that let me connect theory with practice, try an idea and learn from the result.</p>
 
-      <hr class="my-4 opacity-100">
+      <hr>
 
-      <section class="mb-4" aria-labelledby="project-heading">
-        <h2 id="project-heading" class="h4 fw-bold mb-3">My personal project</h2>
-        <img src="ken-vpn.png" alt="KEN VPN app icon: a white swirl around a cyan centre on a dark blue background" width="96" height="96" class="img-fluid rounded-4 mb-3 project-icon">
-        <h3 class="h5 fw-bold">KEN VPN</h3>
-        <p>KEN VPN is a personal app project I am developing with Flutter. It brings together my interests in networking, privacy and app design, and gives me opportunities to practise development, testing and troubleshooting.</p>
-        <p><a href="https://kensecure.com/" title="Visit the KEN VPN website">Explore KEN VPN</a></p>
+      <h2>My personal project</h2>
 
-        <h4 class="fs-6 fw-bold mb-1">Development priorities</h4>
-        <p>Reliable connections and an interface that is easy to understand.</p>
-        <h5 class="fs-6 fw-bold mb-1">User experience</h5>
-        <p>Clear information helps people understand what the app is doing.</p>
-        <h6 class="fs-6 fw-bold mb-1">Connection status</h6>
-        <p>One example is making the difference between connecting and connected easy to recognise.</p>
-      </section>
+      <img src="ken-vpn.png" alt="KEN VPN app icon: a white swirl around a cyan centre on a dark blue background" width="96" height="96" class="project-icon">
+      <h3>KEN VPN</h3>
+      <p>KEN VPN is a personal app project I am developing with Flutter. It brings together my interests in networking, privacy and app design, and gives me opportunities to practise development, testing and troubleshooting.</p>
+      <p><a href="https://kensecure.com/" title="Visit the KEN VPN website">Explore KEN VPN</a></p>
 
-      <section class="mb-4" aria-labelledby="learning-heading">
-        <h2 id="learning-heading" class="h4 fw-bold">My approach to learning</h2>
-        <pre class="bg-body-tertiary p-3 mb-0">Learn the idea
+      <h4 class="priority-heading">Development priorities</h4>
+      <p class="detail-copy">Reliable connections and an interface that is easy to understand.</p>
+      <h5 class="detail-heading">User experience</h5>
+      <p class="detail-copy">Clear information helps people understand what the app is doing.</p>
+      <h6 class="detail-heading">Connection status</h6>
+      <p class="detail-copy">One example is making the difference between connecting and connected easy to recognise.</p>
+
+      <h2>My approach to learning</h2>
+
+      <pre>Learn the idea
   Build something small
   Test the result
 Keep improving</pre>
-      </section>
 
-      <section id="learning-session" class="card border-black mb-4" aria-labelledby="planner-heading">
-        <div class="card-body">
-          <h2 id="planner-heading" class="h4 fw-bold">Plan a learning session</h2>
-          <p>Choose a topic and the time you have available to get a simple study plan.</p>
+      <section id="learning-session" aria-labelledby="planner-heading">
+        <h2 id="planner-heading">Plan a learning session</h2>
+        <p>Choose a topic and the time you have available to get a simple study plan.</p>
 
-          <form id="learning-planner" hidden>
-            <div class="row g-3 planner-fields">
-              <div class="col-12 col-md-6">
-                <label for="learning-topic" class="form-label fw-bold">Topic</label>
-                <select id="learning-topic" name="topic" class="form-select" required>
-                  <option value="">Choose a topic</option>
-                  <option value="html">HTML</option>
-                  <option value="css">CSS</option>
-                  <option value="javascript">JavaScript</option>
-                </select>
-              </div>
-              <div class="col-12 col-md-6">
-                <label for="learning-minutes" class="form-label fw-bold">Time available (minutes)</label>
-                <input id="learning-minutes" name="minutes" class="form-control" type="number" min="15" max="120" step="5" value="30" required aria-describedby="minutes-help">
-                <p id="minutes-help" class="form-text text-black mb-0">15 to 120 minutes, in steps of 5.</p>
-              </div>
+        <form id="learning-planner" hidden>
+          <div class="planner-fields">
+            <div class="form-field">
+              <label for="learning-topic">Topic</label>
+              <select id="learning-topic" name="topic" required>
+                <option value="">Choose a topic</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="javascript">JavaScript</option>
+              </select>
             </div>
-
-            <div class="form-check my-3">
-              <input id="include-practice" name="practice" class="form-check-input" type="checkbox" checked>
-              <label class="form-check-label" for="include-practice">Include a practical exercise</label>
+            <div class="form-field">
+              <label for="learning-minutes">Time available (minutes)</label>
+              <input id="learning-minutes" name="minutes" type="number" min="15" max="120" step="5" value="30" required aria-describedby="minutes-help">
+              <p id="minutes-help" class="field-help">15 to 120 minutes, in steps of 5.</p>
             </div>
-
-            <div class="d-flex flex-wrap gap-2">
-              <button type="submit" class="btn btn-light border-black text-black fw-bold">Plan my session</button>
-              <button type="reset" class="btn btn-light border-black text-black">Reset</button>
-            </div>
-            <p id="planner-result" class="bg-body-tertiary border-start border-3 border-black p-3 mt-3 mb-0" role="status" aria-atomic="true">Choose your options, then select Plan my session.</p>
-          </form>
-          <noscript><p>Enable JavaScript in your browser to use the learning-session planner.</p></noscript>
-        </div>
-      </section>
-
-      <section id="github-project" class="card border-black mb-4" aria-labelledby="github-heading">
-        <div class="card-body">
-          <h2 id="github-heading" class="h4 fw-bold">This website on GitHub</h2>
-          <p>See the latest public details about the code behind this page.</p>
-
-          <div id="github-controls" hidden>
-            <button id="load-project" class="btn btn-light border-black text-black" type="button">Load project details</button>
-            <p id="github-status" class="mt-3 mb-0" role="status" aria-atomic="true">Select the button to load the details from GitHub.</p>
-            <dl id="github-details" class="bg-body-tertiary border-start border-3 border-black p-3 mt-3 mb-0" hidden>
-              <dt>Project name</dt>
-              <dd id="project-name"></dd>
-              <dt>Description</dt>
-              <dd id="project-description"></dd>
-              <dt>Main language</dt>
-              <dd id="project-language"></dd>
-              <dt>Code last pushed</dt>
-              <dd id="project-pushed" class="mb-0"></dd>
-            </dl>
           </div>
-          <noscript><p>Enable JavaScript to load the project details, or use the code link below.</p></noscript>
-        </div>
+
+          <label class="checkbox-label" for="include-practice">
+            <input id="include-practice" name="practice" type="checkbox" checked>
+            Include a practical exercise
+          </label>
+
+          <div class="form-actions">
+            <button type="submit">Plan my session</button>
+            <button type="reset">Reset</button>
+          </div>
+          <p id="planner-result" class="planner-result" role="status" aria-atomic="true">Choose your options, then select Plan my session.</p>
+        </form>
+        <noscript><p>Enable JavaScript in your browser to use the learning-session planner.</p></noscript>
       </section>
 
-      <footer class="small">
-        <p class="mb-0">Emmanuel Essel &middot; Web Technologies<br><a href="https://github.com/EmmanuelEsselSHU/my-first-web-app" title="View the HTML source on GitHub">View this website's code</a></p>
-      </footer>
+      <section id="github-project" aria-labelledby="github-heading">
+        <h2 id="github-heading">This website on GitHub</h2>
+        <p>See the latest public details about the code behind this page.</p>
+
+        <div id="github-controls" hidden>
+          <div class="form-actions">
+            <button id="load-project" type="button">Load project details</button>
+          </div>
+          <p id="github-status" role="status" aria-atomic="true">Select the button to load the details from GitHub.</p>
+          <dl id="github-details" class="project-details" hidden>
+            <dt>Project name</dt>
+            <dd id="project-name"></dd>
+            <dt>Description</dt>
+            <dd id="project-description"></dd>
+            <dt>Main language</dt>
+            <dd id="project-language"></dd>
+            <dt>Code last pushed</dt>
+            <dd id="project-pushed"></dd>
+          </dl>
+        </div>
+        <noscript><p>Enable JavaScript to load the project details, or use the code link below.</p></noscript>
+      </section>
+
+      <p class="page-footer">Emmanuel Essel &middot; Web Technologies<br><a href="https://github.com/EmmanuelEsselSHU/my-first-web-app" title="View the HTML source on GitHub">View this website's code</a></p>
     </main>
+    <script>
+      const planner = document.getElementById('learning-planner');
+      const topicInput = document.getElementById('learning-topic');
+      const minutesInput = document.getElementById('learning-minutes');
+      const practiceInput = document.getElementById('include-practice');
+      const result = document.getElementById('planner-result');
+      const startingMessage = result.textContent;
+
+      const topics = {
+        html: {
+          name: 'HTML',
+          reading: 'review headings, paragraphs and meaningful links',
+          exercise: 'build a section with a heading, a paragraph and a link'
+        },
+        css: {
+          name: 'CSS',
+          reading: 'review selectors, spacing and media queries',
+          exercise: 'adjust a layout and check it at phone and desktop widths'
+        },
+        javascript: {
+          name: 'JavaScript',
+          reading: 'review variables, events and updating page text',
+          exercise: 'make a button update a message when clicked'
+        }
+      };
+
+      planner.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const topic = topics[topicInput.value];
+        const minutes = minutesInput.valueAsNumber;
+
+        if (!topic || !Number.isInteger(minutes) || minutes < 15 || minutes > 120 || minutes % 5 !== 0) {
+          result.textContent = 'Choose a topic and enter 15 to 120 minutes in steps of 5.';
+          return;
+        }
+
+        let readingMinutes = minutes - 5;
+        let exerciseStep = '';
+
+        if (practiceInput.checked) {
+          readingMinutes = Math.max(5, Math.round(minutes * 0.3 / 5) * 5);
+          const practiceMinutes = minutes - readingMinutes - 5;
+          exerciseStep = `${practiceMinutes} minutes to ${topic.exercise}. `;
+        }
+
+        result.textContent = `Your ${minutes}-minute ${topic.name} plan: ` +
+          `${readingMinutes} minutes to ${topic.reading}. ` + exerciseStep +
+          'Finish with 5 minutes to note what you learnt and one thing to try next.';
+      });
+
+      function clearPlan() {
+        if (result.textContent !== startingMessage) {
+          result.textContent = startingMessage;
+        }
+      }
+
+      planner.addEventListener('input', clearPlan);
+      planner.addEventListener('reset', clearPlan);
+      planner.hidden = false;
+
+      const loadProjectButton = document.getElementById('load-project');
+      const githubStatus = document.getElementById('github-status');
+      const githubDetails = document.getElementById('github-details');
+      const repositoryUrl = 'https://api.github.com/repos/EmmanuelEsselSHU/my-first-web-app';
+
+      loadProjectButton.addEventListener('click', async function () {
+        if (loadProjectButton.disabled) return;
+        loadProjectButton.disabled = true;
+        loadProjectButton.textContent = 'Loading...';
+        githubDetails.hidden = true;
+        githubStatus.textContent = 'Loading project details from GitHub...';
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(function () { controller.abort(); }, 10000);
+        let failureMessage = 'Could not load the project details. Check your connection and try again.';
+
+        try {
+          const response = await fetch(repositoryUrl, {
+            headers: {
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2026-03-10'
+            },
+            signal: controller.signal
+          });
+
+          if (!response.ok) {
+            if (response.status === 403 || response.status === 429) {
+              failureMessage = 'GitHub is temporarily refusing requests. Please try again later.';
+            } else if (response.status === 404) {
+              failureMessage = 'This project could not be found on GitHub. Please try again later.';
+            }
+            throw new Error('The API request was unsuccessful.');
+          }
+
+          failureMessage = 'GitHub returned unexpected data. Please try again later.';
+          const repository = await response.json();
+          if (!repository || Array.isArray(repository) || typeof repository.name !== 'string' || !repository.name.trim()) {
+            throw new Error('A project name was missing from the response.');
+          }
+
+          if (repository.pushed_at != null && typeof repository.pushed_at !== 'string') {
+            throw new Error('The response contained an invalid date.');
+          }
+          const pushedAt = repository.pushed_at ? new Date(repository.pushed_at) : null;
+          if (pushedAt && Number.isNaN(pushedAt.getTime())) {
+            throw new Error('The response contained an invalid date.');
+          }
+
+          document.getElementById('project-name').textContent = repository.name;
+          document.getElementById('project-description').textContent =
+            typeof repository.description === 'string' && repository.description.trim()
+              ? repository.description : 'No description provided.';
+          document.getElementById('project-language').textContent =
+            typeof repository.language === 'string' && repository.language.trim()
+              ? repository.language : 'Not yet identified.';
+          document.getElementById('project-pushed').textContent = pushedAt
+            ? pushedAt.toLocaleString('en-GB', {
+                dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/London'
+              }) + ' (UK time)'
+            : 'Not available.';
+
+          githubDetails.hidden = false;
+          githubStatus.textContent = 'Project details loaded from GitHub.';
+        } catch (error) {
+          githubStatus.textContent = error.name === 'AbortError'
+            ? 'GitHub took too long to respond. Please try again.'
+            : failureMessage;
+        } finally {
+          clearTimeout(timeoutId);
+          loadProjectButton.disabled = false;
+          loadProjectButton.textContent = githubDetails.hidden ? 'Try again' : 'Refresh project details';
+        }
+      });
+
+      document.getElementById('github-controls').hidden = false;
+    </script>
   </body>
 </html>
